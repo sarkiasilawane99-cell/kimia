@@ -1,0 +1,1941 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ASESMEN SUMATIF AKHIR SEMESTER (SAS) KIMIA - SMAN 46 MALUKU TENGAH</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Font: Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Canvas Confetti -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#f0fdf4',
+                            100: '#dcfce7',
+                            500: '#22c55e',
+                            600: '#16a34a',
+                            700: '#15803d',
+                            800: '#166534',
+                            900: '#14532d',
+                        },
+                        tech: {
+                            50: '#f0f9ff',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            700: '#0369a1',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .custom-scrollbar::-webkit-scrollbar { width: 6px; height: 6px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: #f1f1f1; border-radius: 4px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+        @media print {
+            .no-print { display: none !important; }
+            .print-only { display: block !important; }
+            body { background: white; color: black; }
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col">
+
+    <!-- Header Navigation -->
+    <header class="bg-gradient-to-r from-emerald-800 via-teal-700 to-cyan-800 text-white shadow-lg sticky top-0 z-40 no-print">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex justify-between items-center">
+            <div class="flex items-center space-x-3">
+                <div class="bg-white/10 p-2 rounded-xl backdrop-blur-sm border border-white/20" id="logoContainer">
+                    <i data-lucide="flask-conical" class="w-8 h-8 text-emerald-300"></i>
+                </div>
+                <div>
+                    <h1 class="font-bold text-lg leading-tight tracking-wide sm:text-xl">ASESMEN SUMATIF AKHIR SEMESTER (SAS)</h1>
+                    <p class="text-xs text-emerald-100 flex items-center gap-2">
+                        <span>SMAN 46 Maluku Tengah</span> • 
+                        <span>Kimia Fase E (Kelas X)</span>
+                    </p>
+                </div>
+            </div>
+            
+            <div class="flex items-center space-x-3">
+                <button onclick="openMatrixModal()" class="hidden md:flex items-center space-x-1 bg-white/10 hover:bg-white/20 text-xs px-3 py-2 rounded-lg transition border border-white/20">
+                    <i data-lucide="grid" class="w-4 h-4"></i>
+                    <span>Kisi-kisi Soal</span>
+                </button>
+                <button id="authBtn" onclick="toggleTeacherAuth()" class="flex items-center space-x-1.5 bg-amber-500 hover:bg-amber-600 text-slate-950 font-semibold text-xs px-3.5 py-2 rounded-lg transition shadow-md">
+                    <i data-lucide="user-cog" class="w-4 h-4"></i>
+                    <span id="authBtnText">Portal Guru</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- MAIN CONTAINER -->
+    <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6">
+        
+        <!-- SECTION 1: REGISTRATION / HOME PAGE -->
+        <div id="homeSection" class="space-y-6">
+            <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 md:p-8">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                    <div class="lg:col-span-7 space-y-4">
+                        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 text-emerald-700 text-xs font-medium border border-emerald-200">
+                            <i data-lucide="sparkles" class="w-3.5 h-3.5"></i>
+                            <span>Kurikulum Merdeka • Taksonomi Bloom Terintegrasi</span>
+                        </div>
+                        <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 leading-snug">
+                            Evaluasi Sumatif Kimia Hijau & Nanoteknologi
+                        </h2>
+                        <p class="text-slate-600 text-sm sm:text-base leading-relaxed">
+                            Selamat datang di portal Asesmen Sumatif Akhir Semester (SAS) Kimia SMAN 46 Maluku Tengah. Asesmen ini mengukur pemahaman konsep, analisis lingkungan kontekstual Maluku Tengah, serta penerapan Nanoteknologi.
+                        </p>
+
+                        <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 pt-2">
+                            <div class="bg-slate-50 p-3 rounded-xl border border-slate-100">
+                                <span class="text-xs text-slate-500 block">Penyusun</span>
+                                <span class="text-sm font-semibold text-slate-800" id="dispEducator">Sarkia Silawane, S.Pd.</span>
+                            </div>
+                            <div class="bg-slate-50 p-3 rounded-xl border border-slate-100">
+                                <span class="text-xs text-slate-500 block">Tahun Pelajaran</span>
+                                <span class="text-sm font-semibold text-slate-800" id="dispYear">2026/2027</span>
+                            </div>
+                            <div class="bg-slate-50 p-3 rounded-xl border border-slate-100 col-span-2 sm:col-span-1">
+                                <span class="text-xs text-slate-500 block">Semester / Waktu</span>
+                                <span class="text-sm font-semibold text-slate-800"><span id="dispSemester">Ganjil</span> • <span id="dispTime">60</span> Menit</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Student Registration Card -->
+                    <div class="lg:col-span-5 bg-gradient-to-br from-slate-900 to-slate-800 text-white p-6 sm:p-7 rounded-2xl shadow-xl relative overflow-hidden">
+                        <div class="absolute top-0 right-0 -mt-6 -mr-6 w-24 h-24 bg-emerald-500/20 rounded-full blur-2xl"></div>
+                        
+                        <h3 class="text-lg font-bold mb-4 flex items-center gap-2">
+                            <i data-lucide="user-check" class="text-emerald-400"></i>
+                            <span>Identitas Peserta Didik</span>
+                        </h3>
+
+                        <form id="studentRegForm" onsubmit="startAssessment(event)" class="space-y-4">
+                            <div>
+                                <label class="block text-xs font-medium text-slate-300 mb-1">Nama Lengkap Peserta Didik</label>
+                                <input type="text" id="regName" required placeholder="Contoh: Pattimura Muda" 
+                                    class="w-full px-3.5 py-2.5 rounded-lg bg-slate-800/80 border border-slate-700 text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-500 text-sm">
+                            </div>
+
+                            <div class="grid grid-cols-2 gap-3">
+                                <div>
+                                    <label class="block text-xs font-medium text-slate-300 mb-1">Kelas</label>
+                                    <select id="regClass" required class="w-full px-3.5 py-2.5 rounded-lg bg-slate-800/80 border border-slate-700 text-white focus:outline-none focus:ring-2 focus:ring-emerald-500 text-sm">
+                                        <option value="">Pilih Kelas</option>
+                                        <option value="X-1">X-1</option>
+                                        <option value="X-2">X-2</option>
+                                        <option value="X-3">X-3</option>
+                                        <option value="X-4">X-4</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-medium text-slate-300 mb-1">Nomor Ujian</label>
+                                    <input type="text" id="regNumber" required placeholder="SAS-1001" 
+                                        class="w-full px-3.5 py-2.5 rounded-lg bg-slate-800/80 border border-slate-700 text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-500 text-sm">
+                                </div>
+                            </div>
+
+                            <div class="bg-slate-800/50 p-3 rounded-lg border border-slate-700/60 text-xs text-slate-300 space-y-1">
+                                <div class="font-semibold text-emerald-400 flex items-center gap-1">
+                                    <i data-lucide="alert-circle" class="w-3.5 h-3.5"></i> Petunjuk Singkat:
+                                </div>
+                                <p>• Soal terdiri dari 30 butir pilihan ganda (A-E).</p>
+                                <p>• Waktu akan berjalan saat tombol ditekan.</p>
+                                <p>• Jawaban tersimpan otomatis secara realtime.</p>
+                            </div>
+
+                            <button type="submit" class="w-full bg-emerald-500 hover:bg-emerald-600 font-bold text-slate-950 py-3 rounded-xl transition flex items-center justify-center space-x-2 shadow-lg shadow-emerald-500/20">
+                                <span>MULAI ASESMEN SEKARANG</span>
+                                <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Fast Information Cards -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="bg-white p-5 rounded-xl border border-slate-200 flex items-start gap-4">
+                    <div class="p-3 bg-emerald-100 rounded-lg text-emerald-800">
+                        <i data-lucide="leaf" class="w-6 h-6"></i>
+                    </div>
+                    <div>
+                        <h4 class="font-semibold text-slate-900">Materi 1: Gerakan Kimia Hijau</h4>
+                        <p class="text-xs text-slate-500 mt-1">18 Soal • Membahas 12 prinsip kimia hijau, pengelolaan limbah sagu & cengkeh, energi terbarukan, serta mitigasi pencemaran di wilayah pesisir Maluku Tengah.</p>
+                    </div>
+                </div>
+                <div class="bg-white p-5 rounded-xl border border-slate-200 flex items-start gap-4">
+                    <div class="p-3 bg-cyan-100 rounded-lg text-cyan-800">
+                        <i data-lucide="atom" class="w-6 h-6"></i>
+                    </div>
+                    <div>
+                        <h4 class="font-semibold text-slate-900">Materi 2: Peranan Nanoteknologi</h4>
+                        <p class="text-xs text-slate-500 mt-1">12 Soal • Membahas material skala nano, karbon nanotube, pemanfaatan nano-titania/nanosilika laut, serta aplikasi di sektor kesehatan & pertanian.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECTION 2: EXAM INTERFACE (HIDDEN BY DEFAULT) -->
+        <div id="examSection" class="hidden space-y-4">
+            <!-- Sticky Controls Header -->
+            <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm flex flex-wrap justify-between items-center gap-3 sticky top-16 z-30">
+                <div class="flex items-center space-x-3">
+                    <span class="bg-emerald-100 text-emerald-800 text-xs px-3 py-1 rounded-full font-semibold" id="examStudentInfo">
+                        Pattimura Muda (X-1)
+                    </span>
+                    <span class="text-xs text-slate-500 hidden sm:inline" id="examProgressText">Soal 1 dari 30</span>
+                </div>
+
+                <!-- Timer Display -->
+                <div class="flex items-center space-x-4">
+                    <div class="flex items-center space-x-1.5 bg-red-50 text-red-700 px-3 py-1.5 rounded-lg border border-red-200 font-mono font-bold text-sm">
+                        <i data-lucide="clock" class="w-4 h-4 animate-pulse"></i>
+                        <span id="timerDisplay">60:00</span>
+                    </div>
+
+                    <button onclick="toggleDrawer()" class="bg-slate-100 hover:bg-slate-200 text-slate-700 p-2 rounded-lg text-xs font-semibold flex items-center gap-1 border border-slate-300">
+                        <i data-lucide="grid" class="w-4 h-4"></i>
+                        <span class="hidden sm:inline">Navigasi Soal</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Main Question & Options Box -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+                <!-- Left: Question Card (8 cols) -->
+                <div class="lg:col-span-8 space-y-4">
+                    <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm space-y-5">
+                        
+                        <!-- Question Header Metadata -->
+                        <div class="flex flex-wrap items-center justify-between gap-2 pb-3 border-b border-slate-100">
+                            <div class="flex items-center space-x-2">
+                                <span class="bg-slate-900 text-white font-bold px-3 py-1 rounded-lg text-sm" id="qNumberLabel">
+                                    Soal #1
+                                </span>
+                                <span class="text-xs font-semibold px-2.5 py-1 rounded-md bg-blue-50 text-blue-700 border border-blue-200" id="qTopicBadge">
+                                    Kimia Hijau
+                                </span>
+                                <span class="text-xs font-medium px-2.5 py-1 rounded-md bg-purple-50 text-purple-700 border border-purple-200" id="qCognitiveBadge">
+                                    Level C4 (Menganalisis)
+                                </span>
+                            </div>
+                            
+                            <button onclick="toggleFlag()" id="flagBtn" class="text-xs flex items-center gap-1 px-3 py-1.5 rounded-lg border border-slate-300 text-slate-600 hover:bg-amber-50 hover:text-amber-700 transition">
+                                <i data-lucide="bookmark" class="w-3.5 h-3.5"></i>
+                                <span>Tandai Ragu-ragu</span>
+                            </button>
+                        </div>
+
+                        <!-- Stimulus Box (If Any) -->
+                        <div id="qStimulusContainer" class="bg-slate-50 border-l-4 border-emerald-500 p-4 rounded-r-xl text-xs sm:text-sm text-slate-700 leading-relaxed font-normal">
+                            <!-- Injected dynamically -->
+                        </div>
+
+                        <!-- Question Text -->
+                        <div id="qText" class="text-sm sm:text-base font-semibold text-slate-900 leading-relaxed">
+                            <!-- Injected dynamically -->
+                        </div>
+
+                        <!-- Options Form -->
+                        <div id="qOptionsContainer" class="space-y-3 pt-2">
+                            <!-- Injected dynamically -->
+                        </div>
+
+                    </div>
+
+                    <!-- Bottom Nav Buttons -->
+                    <div class="flex justify-between items-center bg-white p-4 rounded-xl border border-slate-200 shadow-sm">
+                        <button onclick="prevQuestion()" id="btnPrev" class="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg text-xs font-semibold flex items-center gap-1 disabled:opacity-40">
+                            <i data-lucide="chevron-left" class="w-4 h-4"></i> Sebelumya
+                        </button>
+                        <button onclick="nextQuestion()" id="btnNext" class="px-5 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg text-xs font-semibold flex items-center gap-1">
+                            <span>Selanjutnya</span> <i data-lucide="chevron-right" class="w-4 h-4"></i>
+                        </button>
+                        <button onclick="confirmSubmitExam()" id="btnFinish" class="hidden px-5 py-2 bg-slate-900 hover:bg-black text-white rounded-lg text-xs font-semibold flex items-center gap-1">
+                            <i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-400"></i> Selesai & Kirim
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Right: Nav Drawer / Palette (4 cols) -->
+                <div class="lg:col-span-4">
+                    <div class="bg-white rounded-2xl border border-slate-200 p-5 shadow-sm space-y-4 sticky top-36">
+                        <h4 class="font-bold text-sm text-slate-800 flex items-center justify-between">
+                            <span>Lembar Navigasi Soal</span>
+                            <span class="text-xs font-normal text-slate-500" id="answeredCounter">0 / 30 Terjawab</span>
+                        </h4>
+
+                        <!-- Grid 1 - 30 Buttons -->
+                        <div class="grid grid-cols-5 gap-2 max-h-72 overflow-y-auto custom-scrollbar p-1" id="questionGrid">
+                            <!-- Dynamic grid generated here -->
+                        </div>
+
+                        <!-- Legend -->
+                        <div class="pt-3 border-t border-slate-100 text-xs space-y-2 text-slate-600">
+                            <div class="flex items-center gap-2">
+                                <span class="w-3 h-3 rounded-full bg-emerald-500 inline-block"></span>
+                                <span>Sudah Dijawab</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <span class="w-3 h-3 rounded-full bg-amber-400 inline-block"></span>
+                                <span>Ragu-ragu (Ditandai)</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <span class="w-3 h-3 rounded-full bg-slate-200 border border-slate-300 inline-block"></span>
+                                <span>Belum Dijawab</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECTION 3: RESULT SECTION (HIDDEN BY DEFAULT) -->
+        <div id="resultSection" class="hidden space-y-6">
+            <div class="bg-white rounded-2xl border border-slate-200 p-6 sm:p-8 shadow-sm space-y-6">
+                <div class="text-center space-y-2 max-w-xl mx-auto">
+                    <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-emerald-100 text-emerald-600 mb-2">
+                        <i data-lucide="award" class="w-8 h-8"></i>
+                    </div>
+                    <h2 class="text-2xl font-extrabold text-slate-900">Hasil Asesmen Sumatif (SAS)</h2>
+                    <p class="text-slate-500 text-xs sm:text-sm" id="resultSubtitle">Terima kasih telah menyelesaikan ujian Kimia Fase E.</p>
+                </div>
+
+                <!-- Main Score Board -->
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-3xl mx-auto">
+                    <div class="bg-slate-900 text-white p-4 rounded-xl text-center space-y-1">
+                        <span class="text-xs text-slate-400 block uppercase tracking-wider">Nilai Akhir</span>
+                        <span class="text-3xl font-black text-emerald-400" id="resScore">0</span>
+                        <span class="text-[10px] text-slate-400 block">Skala 100</span>
+                    </div>
+                    <div class="bg-emerald-50 border border-emerald-200 p-4 rounded-xl text-center space-y-1">
+                        <span class="text-xs text-emerald-700 block font-medium">Jawaban Benar</span>
+                        <span class="text-3xl font-extrabold text-emerald-800" id="resCorrect">0</span>
+                        <span class="text-[10px] text-emerald-600 block">Soal</span>
+                    </div>
+                    <div class="bg-red-50 border border-red-200 p-4 rounded-xl text-center space-y-1">
+                        <span class="text-xs text-red-700 block font-medium">Jawaban Salah</span>
+                        <span class="text-3xl font-extrabold text-red-800" id="resWrong">0</span>
+                        <span class="text-[10px] text-red-600 block">Soal</span>
+                    </div>
+                    <div class="bg-amber-50 border border-amber-200 p-4 rounded-xl text-center space-y-1">
+                        <span class="text-xs text-amber-700 block font-medium">Predikat / Kategori</span>
+                        <span class="text-lg font-bold text-amber-800 block mt-1" id="resCategory">Cukup</span>
+                        <span class="text-[10px] text-amber-600 block" id="resKkmStatus">Sesuai KKM (75)</span>
+                    </div>
+                </div>
+
+                <!-- Student Detail Summary -->
+                <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 text-xs sm:text-sm max-w-3xl mx-auto grid grid-cols-1 sm:grid-cols-3 gap-2 text-slate-700">
+                    <div><span class="text-slate-400">Nama:</span> <strong id="resName">-</strong></div>
+                    <div><span class="text-slate-400">Kelas:</span> <strong id="resClass">-</strong></div>
+                    <div><span class="text-slate-400">No. Ujian:</span> <strong id="resNum">-</strong></div>
+                </div>
+
+                <!-- Action Controls -->
+                <div class="flex justify-center gap-3 pt-2">
+                    <button onclick="toggleReviewSection()" id="btnToggleReview" class="bg-emerald-600 hover:bg-emerald-700 text-white font-semibold text-xs sm:text-sm px-5 py-2.5 rounded-xl transition flex items-center gap-2 shadow-sm">
+                        <i data-lucide="book-open" class="w-4 h-4"></i>
+                        <span>Lihat Pembahasan Soal</span>
+                    </button>
+                    <button onclick="location.reload()" class="bg-slate-200 hover:bg-slate-300 text-slate-800 font-semibold text-xs sm:text-sm px-5 py-2.5 rounded-xl transition flex items-center gap-2">
+                        <i data-lucide="rotate-ccw" class="w-4 h-4"></i>
+                        <span>Halaman Utama</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Detailed Explanation Section (Shown if Enabled by Teacher) -->
+            <div id="reviewContainer" class="hidden space-y-4">
+                <h3 class="text-lg font-bold text-slate-900 flex items-center gap-2">
+                    <i data-lucide="file-check" class="text-emerald-600"></i>
+                    <span>Pembahasan & Analisis Jawaban</span>
+                </h3>
+
+                <div id="reviewList" class="space-y-4">
+                    <!-- Dynamic Answer Key and Explanation items -->
+                </div>
+            </div>
+        </div>
+
+        <!-- SECTION 4: TEACHER / ADMIN DASHBOARD (HIDDEN BY DEFAULT) -->
+        <div id="teacherDashboard" class="hidden space-y-6">
+            <!-- Admin Top Navigation & Settings Banner -->
+            <div class="bg-slate-900 text-white p-6 rounded-2xl shadow-md flex flex-wrap justify-between items-center gap-4">
+                <div>
+                    <span class="bg-amber-500/20 text-amber-300 text-xs px-2.5 py-1 rounded-md font-semibold border border-amber-500/30">
+                        MODE ADMINISTRATOR GURU
+                    </span>
+                    <h2 class="text-xl font-bold mt-1">Dashboard Pengelolaan Asesmen SAS Kimia</h2>
+                </div>
+                <div class="flex flex-wrap gap-2">
+                    <button onclick="exportResultsCSV()" class="bg-emerald-600 hover:bg-emerald-700 text-xs px-3.5 py-2 rounded-lg font-semibold flex items-center gap-1.5 transition">
+                        <i data-lucide="download" class="w-4 h-4"></i> Ekspor Excel/CSV
+                    </button>
+                    <button onclick="window.print()" class="bg-cyan-600 hover:bg-cyan-700 text-xs px-3.5 py-2 rounded-lg font-semibold flex items-center gap-1.5 transition">
+                        <i data-lucide="printer" class="w-4 h-4"></i> Cetak PDF
+                    </button>
+                    <button onclick="exitTeacherMode()" class="bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs px-3.5 py-2 rounded-lg font-semibold border border-slate-700 flex items-center gap-1 transition">
+                        <i data-lucide="log-out" class="w-4 h-4"></i> Keluar Admin
+                    </button>
+                </div>
+            </div>
+
+            <!-- Admin Tabs Navigation -->
+            <div class="flex border-b border-slate-200 gap-4 overflow-x-auto custom-scrollbar">
+                <button onclick="switchAdminTab('analyticsTab')" id="tabNavAnalytics" class="py-2.5 px-4 font-semibold text-xs sm:text-sm border-b-2 border-emerald-600 text-emerald-700 flex items-center gap-2">
+                    <i data-lucide="bar-chart-3" class="w-4 h-4"></i> Analisis & Rekap Hasil
+                </button>
+                <button onclick="switchAdminTab('bankTab')" id="tabNavBank" class="py-2.5 px-4 font-semibold text-xs sm:text-sm text-slate-500 hover:text-slate-800 flex items-center gap-2">
+                    <i data-lucide="database" class="w-4 h-4"></i> Kelola Bank Soal (30 Soal)
+                </button>
+                <button onclick="switchAdminTab('settingsTab')" id="tabNavSettings" class="py-2.5 px-4 font-semibold text-xs sm:text-sm text-slate-500 hover:text-slate-800 flex items-center gap-2">
+                    <i data-lucide="settings" class="w-4 h-4"></i> Pengaturan Ujian
+                </button>
+            </div>
+
+            <!-- TAB 1: ANALYTICS & REKAP -->
+            <div id="analyticsTab" class="space-y-6">
+                <!-- Summary Stats Cards -->
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <div class="bg-white p-4 rounded-xl border border-slate-200">
+                        <span class="text-xs text-slate-500 block">Rata-rata Nilai Kelas</span>
+                        <span class="text-2xl font-black text-slate-900" id="statAvg">0.0</span>
+                    </div>
+                    <div class="bg-white p-4 rounded-xl border border-slate-200">
+                        <span class="text-xs text-slate-500 block">Nilai Tertinggi / Terendah</span>
+                        <span class="text-2xl font-black text-emerald-600" id="statHighLow">0 / 0</span>
+                    </div>
+                    <div class="bg-white p-4 rounded-xl border border-slate-200">
+                        <span class="text-xs text-slate-500 block">Persentase Ketuntasan (KKM 75)</span>
+                        <span class="text-2xl font-black text-blue-600" id="statPassingRate">0%</span>
+                    </div>
+                    <div class="bg-white p-4 rounded-xl border border-slate-200">
+                        <span class="text-xs text-slate-500 block">Total Peserta Mengerjakan</span>
+                        <span class="text-2xl font-black text-purple-600" id="statTotalStudents">0</span>
+                    </div>
+                </div>
+
+                <!-- Charts Section -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="bg-white p-5 rounded-2xl border border-slate-200 space-y-3">
+                        <h4 class="font-bold text-sm text-slate-800 flex items-center gap-2">
+                            <i data-lucide="pie-chart" class="text-emerald-600 w-4 h-4"></i>
+                            <span>Pencapaian Rata-Rata Per Materi</span>
+                        </h4>
+                        <div class="h-64 relative">
+                            <canvas id="topicChart"></canvas>
+                        </div>
+                    </div>
+                    <div class="bg-white p-5 rounded-2xl border border-slate-200 space-y-3">
+                        <h4 class="font-bold text-sm text-slate-800 flex items-center gap-2">
+                            <i data-lucide="bar-chart-2" class="text-cyan-600 w-4 h-4"></i>
+                            <span>Pencapaian Berdasarkan Level Kognitif Bloom</span>
+                        </h4>
+                        <div class="h-64 relative">
+                            <canvas id="bloomChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Table Student Submissions -->
+                <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
+                    <div class="p-4 bg-slate-50 border-b border-slate-200 flex justify-between items-center">
+                        <h4 class="font-bold text-sm text-slate-800">Daftar Nilai Peserta Didik</h4>
+                        <button onclick="clearAllResults()" class="text-xs text-red-600 hover:text-red-800 font-medium">
+                            Hapus Semua Rekap Data
+                        </button>
+                    </div>
+                    <div class="overflow-x-auto custom-scrollbar">
+                        <table class="w-full text-left text-xs sm:text-sm">
+                            <thead class="bg-slate-100 text-slate-600 font-semibold uppercase tracking-wider text-[11px]">
+                                <tr>
+                                    <th class="p-3">No</th>
+                                    <th class="p-3">Nama Lengkap</th>
+                                    <th class="p-3">Kelas</th>
+                                    <th class="p-3">No. Ujian</th>
+                                    <th class="p-3">Benar / Salah</th>
+                                    <th class="p-3">Nilai</th>
+                                    <th class="p-3">Status</th>
+                                    <th class="p-3 text-right">Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody id="studentResultsTableBody" class="divide-y divide-slate-200">
+                                <!-- Injected dynamically -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB 2: BANK SOAL MANAGER -->
+            <div id="bankTab" class="hidden space-y-4">
+                <div class="flex justify-between items-center bg-white p-4 rounded-xl border border-slate-200">
+                    <div>
+                        <h3 class="font-bold text-slate-800">Daftar Bank Soal SAS Kimia</h3>
+                        <p class="text-xs text-slate-500">30 Butir Soal Terstruktur (18 Kimia Hijau, 12 Nanoteknologi)</p>
+                    </div>
+                    <div class="flex gap-2">
+                        <button onclick="openMatrixModal()" class="bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs px-3 py-2 rounded-lg font-semibold border border-slate-300">
+                            Lihat Matriks Kisi-Kisi
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Questions Accordion / List -->
+                <div id="adminQuestionList" class="space-y-4">
+                    <!-- Dynamic editable questions -->
+                </div>
+            </div>
+
+            <!-- TAB 3: EXAM SETTINGS -->
+            <div id="settingsTab" class="hidden bg-white p-6 rounded-2xl border border-slate-200 space-y-6">
+                <h3 class="font-bold text-slate-900 border-b pb-3">Konfigurasi Sistem Asesmen</h3>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-xs sm:text-sm">
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block font-medium text-slate-700 mb-1">Durasi Pengerjaan (Menit)</label>
+                            <input type="number" id="settingTime" value="60" class="w-full p-2.5 rounded-lg border border-slate-300">
+                        </div>
+                        <div>
+                            <label class="block font-medium text-slate-700 mb-1">Tahun Pelajaran</label>
+                            <input type="text" id="settingYear" value="2026/2027" class="w-full p-2.5 rounded-lg border border-slate-300">
+                        </div>
+                        <div>
+                            <label class="block font-medium text-slate-700 mb-1">Semester</label>
+                            <select id="settingSemester" class="w-full p-2.5 rounded-lg border border-slate-300">
+                                <option value="Ganjil">Ganjil</option>
+                                <option value="Genap">Genap</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="space-y-4">
+                        <div class="flex items-center justify-between p-3 bg-slate-50 rounded-xl border border-slate-200">
+                            <div>
+                                <span class="font-semibold block text-slate-800">Tampilkan Pembahasan Kunci Jawaban</span>
+                                <span class="text-xs text-slate-500">Siswa dapat melihat pembahasan setelah tes selesai.</span>
+                            </div>
+                            <input type="checkbox" id="settingShowReview" checked class="w-5 h-5 accent-emerald-600">
+                        </div>
+                        <div class="flex items-center justify-between p-3 bg-slate-50 rounded-xl border border-slate-200">
+                            <div>
+                                <span class="font-semibold block text-slate-800">Acak Urutan Pilihan Jawaban</span>
+                                <span class="text-xs text-slate-500">Mencegah terjadinya kecurangan antar siswa.</span>
+                            </div>
+                            <input type="checkbox" id="settingShuffleOptions" class="w-5 h-5 accent-emerald-600">
+                        </div>
+                        <div class="flex items-center justify-between p-3 bg-slate-50 rounded-xl border border-slate-200">
+                            <div>
+                                <span class="font-semibold block text-slate-800">Acak Urutan Soal</span>
+                                <span class="text-xs text-slate-500">Mengacak urutan 30 nomor soal untuk setiap siswa.</span>
+                            </div>
+                            <input type="checkbox" id="settingShuffleQuestions" class="w-5 h-5 accent-emerald-600">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="pt-4 border-t flex justify-end">
+                    <button onclick="saveAdminSettings()" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-6 py-2.5 rounded-xl text-xs sm:text-sm transition">
+                        Simpan Pengaturan Asesmen
+                    </button>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- MATRIX OVERVIEW MODAL -->
+    <div id="matrixModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl max-w-4xl w-full max-h-[90vh] flex flex-col shadow-2xl overflow-hidden">
+            <div class="p-4 bg-slate-900 text-white flex justify-between items-center">
+                <h3 class="font-bold text-sm sm:text-base flex items-center gap-2">
+                    <i data-lucide="grid" class="text-emerald-400"></i>
+                    <span>Matriks Distribution & Kisi-Kisi 30 Soal SAS Kimia</span>
+                </h3>
+                <button onclick="closeMatrixModal()" class="text-slate-400 hover:text-white">
+                    <i data-lucide="x" class="w-5 h-5"></i>
+                </button>
+            </div>
+            
+            <div class="p-6 overflow-y-auto custom-scrollbar space-y-6">
+                <!-- Summary cognitive table -->
+                <div class="border rounded-xl overflow-hidden">
+                    <table class="w-full text-xs text-center border-collapse">
+                        <thead class="bg-slate-100 font-bold text-slate-700">
+                            <tr class="border-b">
+                                <th class="p-2 text-left">Materi Pokok</th>
+                                <th class="p-2 bg-blue-50">C1 (Ingat)</th>
+                                <th class="p-2 bg-blue-50">C2 (Paham)</th>
+                                <th class="p-2 bg-blue-50">C3 (Terap)</th>
+                                <th class="p-2 bg-purple-50">C4 (Analisis)</th>
+                                <th class="p-2 bg-purple-50">C5 (Evaluasi)</th>
+                                <th class="p-2 bg-purple-50">C6 (Cipta)</th>
+                                <th class="p-2 bg-emerald-100 font-bold">Total Soal</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y text-slate-600">
+                            <tr>
+                                <td class="p-2 font-semibold text-left">1. Gerakan Kimia Hijau</td>
+                                <td>2</td>
+                                <td>3</td>
+                                <td>4</td>
+                                <td>5</td>
+                                <td>3</td>
+                                <td>1</td>
+                                <td class="font-bold text-emerald-800 bg-emerald-50">18 Soal</td>
+                            </tr>
+                            <tr>
+                                <td class="p-2 font-semibold text-left">2. Peranan Nanoteknologi</td>
+                                <td>1</td>
+                                <td>3</td>
+                                <td>2</td>
+                                <td>4</td>
+                                <td>1</td>
+                                <td>1</td>
+                                <td class="font-bold text-emerald-800 bg-emerald-50">12 Soal</td>
+                            </tr>
+                            <tr class="bg-slate-50 font-bold text-slate-900 border-t-2">
+                                <td class="p-2 text-left">Jumlah Butir</td>
+                                <td>3</td>
+                                <td>6</td>
+                                <td>6</td>
+                                <td>9</td>
+                                <td>4</td>
+                                <td>2</td>
+                                <td class="bg-emerald-200 text-emerald-950">30 SOAL</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <p class="text-xs text-slate-500 italic">
+                    *Catatan: Seluruh stimulus disesuaikan dengan fenomena lokal Maluku Tengah (Pengelolaan sagu, limbah pala/cengkeh, pencemaran teluk, serta aplikasi nano-silika pesisir).*
+                </p>
+            </div>
+            
+            <div class="p-4 bg-slate-50 border-t text-right">
+                <button onclick="closeMatrixModal()" class="px-5 py-2 bg-slate-800 text-white rounded-lg text-xs font-semibold">Tutup</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ADMIN AUTH MODAL -->
+    <div id="authModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl space-y-4">
+            <div class="text-center space-y-1">
+                <h3 class="font-bold text-lg text-slate-900">Autentikasi Guru / Admin</h3>
+                <p class="text-xs text-slate-500">Masukkan kata sandi untuk mengelola soal & melihat rekap hasil.</p>
+            </div>
+            
+            <div>
+                <label class="block text-xs font-semibold text-slate-700 mb-1">Kata Sandi</label>
+                <input type="password" id="adminPasswordInput" placeholder="Default: admin123" class="w-full p-2.5 border rounded-lg text-sm focus:ring-2 focus:ring-emerald-500">
+            </div>
+
+            <div class="flex gap-2">
+                <button onclick="closeAuthModal()" class="w-1/2 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg text-xs font-semibold">Batal</button>
+                <button onclick="verifyTeacherPass()" class="w-1/2 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg text-xs font-semibold">Masuk Dashboard</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="bg-white border-t border-slate-200 py-4 mt-auto no-print">
+        <div class="max-w-7xl mx-auto px-4 text-center text-xs text-slate-500 space-y-1">
+            <p><strong>ASESMEN SUMATIF AKHIR SEMESTER (SAS) KIMIA FASE E</strong> • SMAN 46 Maluku Tengah</p>
+            <p>Disusun oleh: <strong>Sarkia Silawane, S.Pd.</strong> | Sistem Berbasis Web & Persistensi Cloud</p>
+        </div>
+    </footer>
+
+    <!-- Firebase Imports & Main App Script -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAuth, signInAnonymously, signInWithCustomToken } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore, collection, addDoc, getDocs, doc, setDoc, deleteDoc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+        // Firebase Setup
+        const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : {
+            apiKey: "demo-key",
+            authDomain: "demo.firebaseapp.com",
+            projectId: "demo-project",
+            storageBucket: "demo.appspot.com",
+            messagingSenderId: "123456",
+            appId: "1:123456:web:123456"
+        };
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'sas-kimia-sman46-malteng';
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+
+        let currentUser = null;
+
+        // Authenticate User for Firebase
+        async function initAuth() {
+            try {
+                if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
+                    await signInWithCustomToken(auth, __initial_auth_token);
+                } else {
+                    await signInAnonymously(auth);
+                }
+                currentUser = auth.currentUser;
+                loadResultsFromCloud();
+            } catch (err) {
+                console.warn("Firebase Auth fallback to local mode:", err);
+            }
+        }
+        initAuth();
+
+        // MASTER QUESTION BANK - 30 ITEMS
+        // Topic 1: Gerakan Kimia Hijau (18 Qs) | Topic 2: Nanoteknologi (12 Qs)
+        // Bloom Levels: 3 C1, 6 C2, 6 C3, 9 C4, 4 C5, 2 C6
+        const initialQuestions = [
+            // SOAL 1 (Kimia Hijau - C1)
+            {
+                id: 1,
+                topic: "Gerakan Kimia Hijau",
+                cognitive: "C1",
+                indicator: "Menyebutkan jumlah dan pencetus konsep 12 prinsip Kimia Hijau.",
+                stimulus: "Konsep Kimia Hijau pertama kali dicetuskan pada awal tahun 1990-an untuk mengurangi dampak bahaya bahan kimia terhadap lingkungan.",
+                text: "Siapakah tokoh kimiawan yang merumuskan 12 Prinsip Kimia Hijau (Green Chemistry)?",
+                options: [
+                    "A. Antoine Lavoisier dan John Dalton",
+                    "B. Paul Anastas dan John Warner",
+                    "C. Dmitri Mendeleev dan Robert Boyle",
+                    "D. Svante Arrhenius dan Gilbert Lewis",
+                    "E. Marie Curie dan Linus Pauling"
+                ],
+                answer: "B",
+                explanation: "Paul Anastas dan John Warner merupakan dua tokoh utama pencetus 12 Prinsip Kimia Hijau pada tahun 1998."
+            },
+            // SOAL 2 (Kimia Hijau - C1)
+            {
+                id: 2,
+                topic: "Gerakan Kimia Hijau",
+                cognitive: "C1",
+                indicator: "Mengidentifikasi definisi atom ekonomi dalam prinsip kimia hijau.",
+                stimulus: "Salah satu indikator efisiensi reaksi dalam kimia hijau adalah pemanfaatan seluruh atom pereaksi.",
+                text: "Prinsip Kimia Hijau yang mengukur sejauh mana atom-atom pereaksi berpindah menjadi produk akhir dinamakan...",
+                options: [
+                    "A. Efisiensi Katalis",
+                    "B. Ekonomi Atom (Atom Economy)",
+                    "C. Degenerasi Molekuler",
+                    "D. Sintesis Terbarukan",
+                    "E. Fotokatalisis Baku"
+                ],
+                answer: "B",
+                explanation: "Ekonomi atom meminimalkan limbah pada tingkat molekuler dengan mengukur efisiensi atom yang masuk ke dalam produk akhir."
+            },
+            // SOAL 3 (Kimia Hijau - C2)
+            {
+                id: 3,
+                topic: "Gerakan Kimia Hijau",
+                cognitive: "C2",
+                indicator: "Menjelaskan pentingnya penggunaan bahan baku terbarukan dalam proses industri.",
+                stimulus: "Di Maluku Tengah, pati sagu dapat dimanfaatkan sebagai alternatif bahan baku plastik terdegradasi (bioplastik) menggantikan minyak bumi.",
+                text: "Mengapa pemanfaatan pati sagu sebagai bahan baku bioplastik sesuai dengan prinsip Kimia Hijau?",
+                options: [
+                    "A. Karena sagu mengandung senyawa toksik berdaya racun tinggi",
+                    "B. Karena sagu merupakan sumber daya alam terbarukan dan ramah lingkungan",
+                    "C. Karena sagu membutuhkan suhu sintesis tinggi saat diproses",
+                    "D. Karena plastik berbasis sagu tidak dapat terurai oleh mikroorganisme",
+                    "E. Karena proses ini meningkatkan jumlah limbah beracun di pesisir"
+                ],
+                answer: "B",
+                explanation: "Penggunaan bahan baku dari tanaman seperti pati sagu mendukung prinsip 'Penggunaan Bahan Baku Terbarukan' dan bersifat biodegradable."
+            },
+            // SOAL 4 (Kimia Hijau - C2)
+            {
+                id: 4,
+                topic: "Gerakan Kimia Hijau",
+                cognitive: "C2",
+                indicator: "Mengidentifikasi prinsip pencegahan limbah daripada pengolahan limbah.",
+                stimulus: "Pabrik pengolahan ikan di wilayah pesisir menghasilkan limbah cair dan padat yang berpotensi mencemari perairan.",
+                text: "Berdasarkan prinsip Kimia Hijau, langkah terbaik yang harus diprioritaskan industri adalah...",
+                options: [
+                    "A. Membuang limbah langsung ke laut lepas pada malam hari",
+                    "B. Mencegah terbentuknya limbah sejak awal proses produksi",
+                    "C. Mengolah limbah setelah menumpuk sangat banyak di pesisir",
+                    "D. Membakar semua limbah padat di area pemukiman warga",
+                    "E. Menambah zat kimia berbahaya agar limbah lebih cepat mengendap"
+                ],
+                answer: "B",
+                explanation: "Prinsip pertama Kimia Hijau menyatakan lebih baik mencegah timbulnya limbah daripada mengolah limbah setelah terbentuk."
+            },
+            // SOAL 5 (Kimia Hijau - C2)
+            {
+                id: 5,
+                topic: "Gerakan Kimia Hijau",
+                cognitive: "C2",
+                indicator: "Memahami peran katalis dalam meningkatkan efisiensi reaksi kimia.",
+                stimulus: "Reaksi kimia industri sering membutuhkan suhu dan tekanan tinggi sehingga mengonsumsi energi dalam jumlah besar.",
+                text: "Penggunaan katalis selektif dalam proses kimia bertujuan untuk...",
+                options: [
+                    "A. Meningkatkan penggunaan bahan bakar fosil",
+                    "B. Memperlambat reaksi agar produk bermutu tinggi",
+                    "C. Meminimalkan energi yang dibutuhkan dan meningkatkan efisiensi reaksi",
+                    "D. Mengubah reaksi homogen menjadi reaksi beracun",
+                    "E. Mengurangi pembentukan produk utama"
+                ],
+                answer: "C",
+                explanation: "Katalis memungkinkan reaksi berlangsung lebih cepat dengan energi aktivasi lebih rendah, hemat energi, dan sangat selektif."
+            },
+            // SOAL 6 (Kimia Hijau - C3)
+            {
+                id: 6,
+                topic: "Gerakan Kimia Hijau",
+                cognitive: "C3",
+                indicator: "Menerapkan prinsip pelarut yang lebih aman dalam kehidupan sehari-hari.",
+                stimulus: "Untuk membersihkan noda minyak pada alat masak tradisional di rumah, warga sering memilih menggunakan sabun pencuci ramah lingkungan atau larutan alami daripada pelarut organik keras.",
+                text: "Tindakan di atas merupakan bentuk penerapan prinsip Kimia Hijau yaitu...",
+                options: [
+                    "A. Rancangan bahan kimia berbahaya",
+                    "B. Penggunaan pelarut dan kondisi reaksi yang lebih aman",
+                    "C. Penggunaan bahan baku yang tak terbarukan",
+                    "D. Peningkatan limbah organik",
+                    "E. Sintesis produk yang persisten"
+                ],
+                answer: "B",
+                explanation: "Memilih pelarut pelarut aman (seperti air atau pencuci berbasis hayati) mendukung prinsip 'Penggunaan Pelarut dan Pembantu yang Lebih Aman'."
+            },
+            // SOAL 7 (Kimia Hijau - C3)
+            {
+                id: 7,
+                topic: "Gerakan Kimia Hijau",
+                cognitive: "C3",
+                indicator: "Menerapkan efisiensi energi pada pengolahan hasil pertanian lokal.",
+                stimulus: "Petani cengkeh di Seram Utara mengeringkan cengkeh menggunakan pengering bertenaga surya (solar dryer) daripada mesin berbahan bakar solar.",
+                text: "Penerapan pengering surya tersebut sesuai dengan prinsip Kimia Hijau dalam hal...",
+                options: [
+                    "A. Efisiensi energi dengan memanfaatkan sumber energi terbarukan",
+                    "B. Memaksimalkan emisi gas rumah kaca",
+                    "C. Menggunakan bahan kimia sintesis untuk pengawet",
+                    "D. Menghasilkan zat beracun baru pada cengkeh",
+                    "E. Memperbanyak penggunaan pelarut beracun"
+                ],
+                answer: "A",
+                explanation: "Memanfaatkan energi matahari mengurangi konsumsi energi fosil, memenuhi prinsip 'Desain untuk Efisiensi Energi'."
+            },
+            // SOAL 8 (Kimia Hijau - C3)
+            {
+                id: 8,
+                topic: "Gerakan Kimia Hijau",
+                cognitive: "C3",
+                indicator: "Menentukan tindakan pengolahan limbah plastik berbasis prinsip kimia hijau.",
+                stimulus: "Sampah botol plastik bekas (PET) menumpuk di perairan Teluk Elpaputih Maluku Tengah.",
+                text: "Langkah konkrit berbasis Kimia Hijau yang paling tepat diterapkan oleh siswa adalah...",
+                options: [
+                    "A. Membakar sampah plastik di pinggir pantai",
+                    "B. Mengolah limbah plastik menjadi produk bernilai tambah (ecobrick/daur ulang) atau bioplastik terurai",
+                    "C. Menimbun sampah plastik ke dalam tanah dekat mata air",
+                    "D. Membuang sampah plastik ke tengah laut agar hanyut",
+                    "E. Melapisi plastik dengan bahan sintesis tambahan"
+                ],
+                answer: "B",
+                explanation: "Mendaur ulang atau mengganti plastik sintesis dengan bioplastik mengurangi akumulasi limbah non-biodegradable di lingkungan."
+            },
+            // SOAL 9 (Kimia Hijau - C3)
+            {
+                id: 9,
+                topic: "Gerakan Kimia Hijau",
+                cognitive: "C3",
+                indicator: "Menerapkan prinsip desain untuk degradasi.",
+                stimulus: "Banyak kantong plastik konvensional membutuhkan waktu hingga 500 tahun untuk terurai di alam.",
+                text: "Industri plastik modern kini memproduksi kantong berbahan polimer asam laktat (PLA) berbasis singkong/sagu yang dapat terurai alami dalam waktu beberapa bulan. Hal ini menerapkan prinsip...",
+                options: [
+                    "A. Pelarut persisten",
+                    "B. Desain untuk degradasi (mudah terurai)",
+                    "C. Sintesis tanpa katalis",
+                    "D. Efisiensi derivatif berlebih",
+                    "E. Penggunaan bahan stoikiometrik"
+                ],
+                answer: "B",
+                explanation: "Prinsip 'Desain untuk Degradasi' menuntut produk kimia dirancang agar dapat terurai menjadi zat tidak berbahaya setelah digunakan."
+            },
+            // SOAL 10 (Kimia Hijau - C4)
+            {
+                id: 10,
+                topic: "Gerakan Kimia Hijau",
+                cognitive: "C4",
+                indicator: "Menganalisis dampak lingkungan dari pembakaran sampah plastik secara terbuka.",
+                stimulus: "Di beberapa desa, pembakaran sampah plastik secara terbuka masih sering dilakukan untuk mengurangi tumpukan sampah.",
+                text: "Berdasarkan analisis kimia lingkungan, pembakaran sampah plastik pembungkus berbahan PVC menghasilkan gas dioksin. Mengapa tindakan ini bertentangan dengan Kimia Hijau?",
+                options: [
+                    "A. Karena dioksin mempercepat pertumbuhan terumbu karang",
+                    "B. Karena dioksin merupakan polutan sangat beracun dan karsinogenik yang merusak kesehatan",
+                    "C. Karena menghasilkan oksigen dalam jumlah terlalu tinggi",
+                    "D. Karena pembakaran plastik tidak membutuhkan energi sama sekali",
+                    "E. Karena gas dioksin menurunkan suhu global secara drastis"
+                ],
+                answer: "B",
+                explanation: "Pembakaran PVC melepaskan gas dioksin yang bersifat racun dan karsinogenik, melanggar prinsip pencegahan bahaya dan zat beracun."
+            },
+            // SOAL 11 (Kimia Hijau - C4)
+            {
+                id: 11,
+                topic: "Gerakan Kimia Hijau",
+                cognitive: "C4",
+                indicator: "Menganalisis fenomena asidifikasi laut akibat emisi CO2 tinggi.",
+                stimulus: "Emisi gas CO2 dari pemukiman dan transportasi meningkat. CO2 yang terserap oleh laut Maluku bereaksi membentuk asam karbonat ($H_2CO_3$), menurunkan pH air laut.",
+                text: "Dampak analisis dari fenomena ini terhadap ekosistem terumbu karang setempat adalah...",
+                options: [
+                    "A. Pertumbuhan cangkang kalsium karbonat ($CaCO_3$) pada karang menjadi lebih cepat",
+                    "B. Karang mengalami pemutihan (bleaching) dan pelarutan cangkang kalsium akibat suasana asam",
+                    "C. Terumbu karang menjadi lebih tahan terhadap serangan hama",
+                    "D. Kandungan Oksigen terlarut meningkat 200%",
+                    "E. Air laut berubah warna menjadi hijau jernih tanpa alga"
+                ],
+                answer: "B",
+                explanation: "Penurunan pH air laut (asidifikasi) akibat akumulasi gas rumah kaca CO2 merusak struktur kalsium karbonat pada terumbu karang."
+            },
+            // SOAL 12 (Kimia Hijau - C4)
+            {
+                id: 12,
+                topic: "Gerakan Kimia Hijau",
+                cognitive: "C4",
+                indicator: "Membandingkan dua reaksi berdasarkan persen ekonomi atom.",
+                stimulus: "Reaksi A memiliki ekonomi atom 95% dengan sisa limbah air, sedangkan Reaksi B memiliki ekonomi atom 45% dengan limbah garam berat.",
+                text: "Berdasarkan perspektif Kimia Hijau, analisis manakah yang paling tepat?",
+                options: [
+                    "A. Reaksi B lebih baik karena menghasilkan produk sampingan berbahaya",
+                    "B. Reaksi A jauh lebih efisien dan ramah lingkungan karena sebagian besar pereaksi menjadi produk berguna",
+                    "C. Kedua reaksi sama saja karena menghasilkan produk yang sama",
+                    "D. Reaksi A membutuhkan lebih banyak biaya pengolahan limbah daripada Reaksi B",
+                    "E. Ekonomi atom tidak berhubungan dengan kelestarian lingkungan"
+                ],
+                answer: "B",
+                explanation: "Semakin tinggi persentase ekonomi atom (mendekati 100%), semakin sedikit limbah yang dihasilkan, sehingga reaksi lebih hijau."
+            },
+            // SOAL 13 (Kimia Hijau - C4)
+            {
+                id: 13,
+                topic: "Gerakan Kimia Hijau",
+                cognitive: "C4",
+                indicator: "Menganalisis penggunaan pestisida kimia sintetis vs pestisida nabati.",
+                stimulus: "Penggunaan pestisida sintetis secara intensif di perkebunan pala menyebabkan hama menjadi resisten dan meracuni biota tanah.",
+                text: "Manakah solusi berbasis Kimia Hijau yang paling tepat untuk mengatasi masalah tersebut?",
+                options: [
+                    "A. Meningkatkan dosis pestisida sintetis hingga 10 kali lipat",
+                    "B. Mengganti dengan biopestisida berbahan ekstrak daun mimba atau serai alami",
+                    "C. Membakar seluruh area tanaman yang terserang hama",
+                    "D. Mengalirkan air laut ke tanah perkebunan",
+                    "E. Membiarkan hama berkembang biak tanpa penanganan"
+                ],
+                answer: "B",
+                explanation: "Biopestisida alami ramah lingkungan, mudah terurai (biodegradable), dan meminimalkan toksisitas terhadap ekosistem."
+            },
+            // SOAL 14 (Kimia Hijau - C4)
+            {
+                id: 14,
+                topic: "Gerakan Kimia Hijau",
+                cognitive: "C4",
+                indicator: "Menganalisis data pengolahan sampah organik menjadi kompos / biogas.",
+                stimulus: "Data menunjukkan bahwa 65% sampah di pasar Masohi Maluku Tengah adalah sampah organik basah yang jika dibiarkan menumpuk menghasilkan gas metana ($CH_4$).",
+                text: "Analisis tindakan pengolahan limbah organik tersebut yang sesuai prinsip Kimia Hijau adalah...",
+                options: [
+                    "A. Membuangnya ke saluran sungai agar hanyut ke laut",
+                    "B. Mengolah sampah organik menjadi biogas dan pupuk kompos terbarukan",
+                    "C. Membungkus rapat sampah dengan kantong plastik lalu dikubur",
+                    "D. Menyiram sampah dengan minyak tanah lalu dibakar",
+                    "E. Menjual sampah organik langsung tanpa pengolahan"
+                ],
+                answer: "B",
+                explanation: "Mengubah sampah organik menjadi biogas dan komposter mengurangi emisi liar gas metana sekaligus menghasilkan energi alternatif."
+            },
+            // SOAL 15 (Kimia Hijau - C5)
+            {
+                id: 15,
+                topic: "Gerakan Kimia Hijau",
+                cognitive: "C5",
+                indicator: "Menevaluasi efektivitas program zero-waste di lingkungan sekolah.",
+                stimulus: "SMAN 46 Maluku Tengah menerapkan aturan larangan kantong plastik sekali pakai dan mengimbau siswa membawa botol minum (tumbler) sendiri.",
+                text: "Evaluasi dampak positif terbaik dari kebijakan sekolah tersebut adalah...",
+                options: [
+                    "A. Menambah beban biaya pembelian botol minum bagi siswa",
+                    "B. Secara signifikan mengurangi volume mikroplastik di lingkungan sekolah dan muara sungai sekitar",
+                    "C. Menyebabkan kantin sekolah bangkrut karena tidak menjual minuman",
+                    "D. Mempercepat proses pemanasan global lokal",
+                    "E. Meningkatkan timbulan sampah plastik dua kali lipat"
+                ],
+                answer: "B",
+                explanation: "Pengurangan plastik dari sumbernya efektif menekan laju akumulasi sampah mikroplastik di lingkungan dan laut."
+            },
+            // SOAL 16 (Kimia Hijau - C5)
+            {
+                id: 16,
+                topic: "Gerakan Kimia Hijau",
+                cognitive: "C5",
+                indicator: "Menevaluasi penggunaan detergen fosfat tinggi terhadap eceng gondok/eutrofikasi.",
+                stimulus: "Limbah domestik yang mengandung fosfat tinggi mengalir ke perairan danau/danau buatan setempat, memicu ledakan pertumbuhan alga (eutrofikasi).",
+                text: "Bagaimana evaluasi saudara terhadap penggunaan detergen bebas fosfat (phosphate-free)?",
+                options: [
+                    "A. Tidak efektif karena fosfat sangat dibutuhkan untuk membunuh alga",
+                    "B. Sangat efektif untuk mencegah eutrofikasi dan menjaga kadar oksigen terlarut bagi kehidupan ikan",
+                    "C. Buruk karena membuat pakaian menjadi sangat kotor",
+                    "D. Menyebabkan air laut berubah menjadi sangat asin",
+                    "E. Mengurangi kadar air bersih di permukaan tanah"
+                ],
+                answer: "B",
+                explanation: "Detergen bebas fosfat mencegah pengayaan nutrisi berlebih (eutrofikasi), sehingga ekosistem perairan tetap seimbang."
+            },
+            // SOAL 17 (Kimia Hijau - C5)
+            {
+                id: 17,
+                topic: "Gerakan Kimia Hijau",
+                cognitive: "C5",
+                indicator: "Menevaluasi pemanfaatan energi panas bumi (geothermal) di Pulau Seram.",
+                stimulus: "Pemerintah merencanakan pembangunan pembangkit listrik tenaga panas bumi (geothermal) untuk menggantikan PLTD (Diesel).",
+                text: "Kritik dan evaluasi yang tepat dari perspektif Kimia Hijau terhadap rencana ini adalah...",
+                options: [
+                    "A. Geothermal sangat merugikan karena menghasilkan gas karbon tinggi",
+                    "B. Langkah tepat karena geothermal merupakan sumber energi terbarukan dengan emisi karbon rendah",
+                    "C. Geothermal harus ditolak karena tidak menggunakan bahan kimia sintesis",
+                    "D. PLTD Diesel jauh lebih ramah lingkungan daripada geothermal",
+                    "E. Geothermal dapat mempercepat kehabisan pasokan minyak bumi"
+                ],
+                answer: "B",
+                explanation: "Geothermal memanfaatkan panas bumi sebagai energi terbarukan yang rendah emisi, sangat sesuai dengan prinsip efisiensi energi hijau."
+            },
+            // SOAL 18 (Kimia Hijau - C6)
+            {
+                id: 18,
+                topic: "Gerakan Kimia Hijau",
+                cognitive: "C6",
+                indicator: "Merancang ide pemanfaatan limbah ampas sagu menjadi produk bernilai tambah.",
+                stimulus: "Proses ekstraksi pati sagu menghasilkan ampas sagu (ela sagu) berlimpah yang sering dibiarkan membusuk dan menimbulkan bau di bantaran sungai.",
+                text: "Sebagai siswa yang kreatif, rancangan solusi terbaik berbasis Kimia Hijau untuk memanfaatkan ampas sagu tersebut adalah...",
+                options: [
+                    "A. Membuang ampas sagu ke tengah laut pada saat pasang",
+                    "B. Mengolah ampas sagu menjadi briket energi terbarukan atau media tanam biochar ramah lingkungan",
+                    "C. Membakar ampas sagu secara terbuka setiap sore hari",
+                    "D. Mengawetkan ampas sagu dengan menambahkan zat formalin",
+                    "E. Menutup saluran sungai agar ampas sagu tidak mengalir"
+                ],
+                answer: "B",
+                explanation: "Mengubah ampas menjadi briket bioenergi atau biochar adalah inovasi produk (C6) yang memanfaatkan limbah biomass (zero waste)."
+            },
+
+            // ================= MATERI 2: PERANAN NANOTEKNOLOGI (12 SOAL) =================
+            // SOAL 19 (Nanoteknologi - C1)
+            {
+                id: 19,
+                topic: "Peranan Nanoteknologi",
+                cognitive: "C1",
+                indicator: "Menyebutkan ukuran skala nanometer.",
+                stimulus: "Nanoteknologi beroperasi pada skala ukuran yang sangat kecil di tingkat atom dan molekul.",
+                text: "Satu nanometer ($1\\text{ nm}$) setara dengan...",
+                options: [
+                    "A. $10^{-3}\\text{ meter}$",
+                    "B. $10^{-6}\\text{ meter}$",
+                    "C. $10^{-9}\\text{ meter}$",
+                    "D. $10^{-12}\\text{ meter}$",
+                    "E. $10^{-15}\\text{ meter}$"
+                ],
+                answer: "C",
+                explanation: "Satu nanometer ($1\\text{ nm}$) adalah seperseribu juta meter atau $10^{-9}\\text{ meter}$."
+            },
+            // SOAL 20 (Nanoteknologi - C2)
+            {
+                id: 20,
+                topic: "Peranan Nanoteknologi",
+                cognitive: "C2",
+                indicator: "Menjelaskan alasan perubahan sifat material saat berukuran nano.",
+                stimulus: "Emas batangan berwarna kuning keemasan dan tidak reaktif, tetapi partikel nano emas (nano-gold) dapat berwarna merah/ungu dan bersifat reaktif.",
+                text: "Penyebab utama perubahan sifat material saat diperkecil ke skala nano adalah...",
+                options: [
+                    "A. Penurunan jumlah proton dalam inti atom",
+                    "B. Peningkatan rasio luas permukaan terhadap volume yang sangat drastis dan efek kuantum",
+                    "C. Perubahan emas menjadi unsur perak",
+                    "D. Kehilangan daya hantar listrik secara total",
+                    "E. Penambahan massa jenis material secara mendadak"
+                ],
+                answer: "B",
+                explanation: "Pada skala nano, rasio luas permukaan terhadap volume meningkat sangat besar sehingga atom-atom permukaan lebih mendominasi sifat material."
+            },
+            // SOAL 21 (Nanoteknologi - C2)
+            {
+                id: 21,
+                topic: "Peranan Nanoteknologi",
+                cognitive: "C2",
+                indicator: "Menjelaskan fenomena titik leleh nanopartikel.",
+                stimulus: "Titik leleh emas makro adalah $1064^\\circ\\text{C}$, namun nanopartikel emas leleh pada suhu yang jauh lebih rendah.",
+                text: "Pernyataan yang tepat mengenai hubungan ukuran partikel dengan titik leleh material adalah...",
+                options: [
+                    "A. Semakin kecil ukuran partikel nano, semakin rendah titik lelehnya karena daya ikat atom permukaan berkurang",
+                    "B. Ukuran partikel tidak mempengaruhi titik leleh sama sekali",
+                    "C. Semakin kecil partikel nano, titik lelehnya naik hingga $3000^\\circ\\text{C}$",
+                    "D. Nanopartikel tidak dapat meleleh dalam kondisi apapun",
+                    "E. Perubahan titik leleh hanya terjadi pada material gas"
+                ],
+                answer: "A",
+                explanation: "Atom pada permukaan nanopartikel memiliki energi permukaan yang tinggi dan ikatan tetangga yang lebih sedikit, menurunkan titik lelehnya."
+            },
+            // SOAL 22 (Nanoteknologi - C2)
+            {
+                id: 22,
+                topic: "Peranan Nanoteknologi",
+                cognitive: "C2",
+                indicator: "Mengidentifikasi aplikasi CNT (Carbon Nanotube).",
+                stimulus: "Struktur alotrop karbon berbentuk tabung silinder seukuran nanometer memiliki kekuatan tarik jauh melampaui baja namun sangat ringan.",
+                text: "Material nano bermata rantai karbon silindris tersebut dikenal dengan sebutan...",
+                options: [
+                    "A. Nano-Silika",
+                    "B. Carbon Nanotube (CNT)",
+                    "C. Quantum Dots Titanium",
+                    "D. Nano-Selulosa Sagu",
+                    "E. Graphene Oxide Padat"
+                ],
+                answer: "B",
+                explanation: "Carbon Nanotube (CNT) adalah gulungan lembaran grafena berskala nano yang luar biasa kuat dan ringan."
+            },
+            // SOAL 23 (Nanoteknologi - C3)
+            {
+                id: 23,
+                topic: "Peranan Nanoteknologi",
+                cognitive: "C3",
+                indicator: "Menerapkan nanoteknologi pada tabir surya (sunscreen).",
+                stimulus: "Krim tabir surya modern mengandung partikel Titanium Dioksida ($TiO_2$) atau Seng Oksida ($ZnO$) berukuran nano.",
+                text: "Keunggulan penggunaan nanopartikel $TiO_2$ pada produk sunscreen dibandingkan partikel ukuran makro adalah...",
+                options: [
+                    "A. Membuat kulit tampak putih tebal seperti dempul",
+                    "B. Transparan saat dioleskan ke kulit namun sangat efektif menyerap dan memantulkan sinar UV",
+                    "C. Menyebabkan iritasi kulit parah",
+                    "D. Menghilangkan fungsi perlindungan sinar matahari",
+                    "E. Mengubah warna krim menjadi hitam pekat"
+                ],
+                answer: "B",
+                explanation: "Nano-$TiO_2$ tidak memantulkan cahaya tampak (sehingga transparan di kulit) namun tetap memblokir radiasi sinar UV secara optimal."
+            },
+            // SOAL 24 (Nanoteknologi - C3)
+            {
+                id: 24,
+                topic: "Peranan Nanoteknologi",
+                cognitive: "C3",
+                indicator: "Menerapkan nanopartikel silika dari abu sekam/pasir laut.",
+                stimulus: "Pasir kuarsa dan limbah pertanian kaya silika dapat diolah menjadi nanosilika.",
+                text: "Manakah penerapan nanosilika di bidang pertanian dan industri bangunan?",
+                options: [
+                    "A. Sebagai zat pewarna makanan sintetis",
+                    "B. Sebagai pupuk penguat ketahanan batang tanaman dan aditif beton berkuatan ultra-tinggi",
+                    "C. Sebagai pelarut minyak mentah",
+                    "D. Sebagai bahan utama pembuat obat bius",
+                    "E. Sebagai pengganti air irigasi"
+                ],
+                answer: "B",
+                explanation: "Nanosilika memperkuat struktur sel tanaman dari serangan hama serta mengisi pori mikro pada beton agar sangat padat dan kuat."
+            },
+            // SOAL 25 (Nanoteknologi - C4)
+            {
+                id: 25,
+                topic: "Peranan Nanoteknologi",
+                cognitive: "C4",
+                indicator: "Menganalisis mekanisme obat berbasis sistem pengiriman nano (targeted drug delivery).",
+                stimulus: "Pengobatan kanker medis konvensional (kemoterapi) sering merusak sel-sel tubuh yang sehat.",
+                text: "Bagaimana teknologi sistem penghantaran obat berbasis nano (nano-capsule/liposom) menyelesaikan masalah tersebut?",
+                options: [
+                    "A. Membunuh seluruh sel dalam tubuh pasien",
+                    "B. Membungkus obat agar hanya lepas dan menyerang sel kanker secara spesifik tanpa merusak sel sehat",
+                    "C. Menetralkan efek obat sehingga obat tidak bereaksi",
+                    "D. Memperbesar ukuran obat menjadi skala milimeter",
+                    "E. Mengubah obat menjadi gas yang mudah menguap di paru-paru"
+                ],
+                answer: "B",
+                explanation: "Nano-carriers menghantarkan obat tepat ke reseptor sel target (kanker), meminimalkan efek samping pada jaringan sehat."
+            },
+            // SOAL 26 (Nanoteknologi - C4)
+            {
+                id: 26,
+                topic: "Peranan Nanoteknologi",
+                cognitive: "C4",
+                indicator: "Menganalisis peranan nano-perak (Nano-Silver) sebagai zat antibakteri.",
+                stimulus: "Perban luka modern dilapisi dengan nanopartikel perak ($Ag-NP$).",
+                text: "Mengapa nano-perak sangat efektif dioleskan pada peralatan medis atau luka bakar?",
+                options: [
+                    "A. Karena nano-perak melepaskan ion $Ag^+$ yang merusak membran dan DNA bakteri pembusuk",
+                    "B. Karena perak membuat luka menjadi panas dan terbakar",
+                    "C. Karena perak memperlambat proses pembekuan darah",
+                    "D. Karena nanopartikel perak dapat dimakan sebagai nutrisi sel",
+                    "E. Karena perak menarik bakteri agar berkumpul di satu tempat"
+                ],
+                answer: "A",
+                explanation: "Nanopartikel perak memiliki aktivitas antimikroba tinggi dengan merusak dinding sel dan menghambat replikasi DNA bakteri."
+            },
+            // SOAL 27 (Nanoteknologi - C4)
+            {
+                id: 27,
+                topic: "Peranan Nanoteknologi",
+                cognitive: "C4",
+                indicator: "Menganalisis penerapan nanoteknologi dalam pembersihan tumpahan minyak di laut.",
+                stimulus: "Tumpahan minyak mentah dari kapal tanker dapat merusak ekosistem perairan pesisir Maluku.",
+                text: "Analisis inovasi nanomaterial yang tepat untuk menyerap minyak di perairan tanpa menyerap air (hidrofobik) adalah...",
+                options: [
+                    "A. Menggunakan nano-spons atau aerogel karbon super-hidrofobik penyerap minyak",
+                    "B. Menaburkan garam dapur sebanyak-banyaknya",
+                    "C. Menyemprotkan detergen pekat ke seluruh permukaan laut",
+                    "D. Membakar seluruh tumpahan minyak di atas laut",
+                    "E. Menyelam untuk memungut minyak secara manual"
+                ],
+                answer: "A",
+                explanation: "Nano-aerogel hidrofobik mengikat minyak dengan cepat dan memisahkannya dari air laut dengan efisiensi tinggi."
+            },
+            // SOAL 28 (Nanoteknologi - C4)
+            {
+                id: 28,
+                topic: "Peranan Nanoteknologi",
+                cognitive: "C4",
+                indicator: "Menganalisis efek Fotokatalisis Nanopartikel $TiO_2$ pada pengolahan limbah cair.",
+                stimulus: "Di bawah paparan sinar matahari, nanopartikel $TiO_2$ dapat memecah polutan organik menjadi $CO_2$ dan $H_2O$.",
+                text: "Proses pembersihan polutan menggunakan nano-$TiO_2$ dan bantuan cahaya ini disebut...",
+                options: [
+                    "A. Elektrolisis Murni",
+                    "B. Fotokatalisis (Self-cleaning)",
+                    "C. Distilasi Bertingkat",
+                    "D. Pyrolisis Bio-Oil",
+                    "E. Fermentasi Anaerob"
+                ],
+                answer: "B",
+                explanation: "Fotokatalisis nano-$TiO_2$ merangsang reaksi radikal bebas pembongkar polutan organik saat terkena paparan sinar ultraviolet."
+            },
+            // SOAL 29 (Nanoteknologi - C5)
+            {
+                id: 29,
+                topic: "Peranan Nanoteknologi",
+                cognitive: "C5",
+                indicator: "Menevaluasi potensi risiko kesehatan dan lingkungan dari nanotoksisitas.",
+                stimulus: "Meski nanoteknologi sangat menguntungkan, beberapa studi menunjukkan nanopartikel yang terlalu kecil dapat terhirup dan menembus pembuluh darah.",
+                text: "Bagaimana evaluasi kritis saudara terhadap penggunaan nanoteknologi di masa depan?",
+                options: [
+                    "A. Nanoteknologi harus dihentikan total di seluruh dunia",
+                    "B. Nanoteknologi harus dikembangkan bersamaan dengan regulasi ketat keamanan (nanotoxicology) dan uji dampak lingkungan",
+                    "C. Bebas digunakan tanpa perlu pengujian keamanan",
+                    "D. Nanopartikel sama sekali tidak memiliki risiko karena berasal dari bahan alami",
+                    "E. Penggunaan nano hanya boleh untuk alat perang"
+                ],
+                answer: "B",
+                explanation: "Pengembangan nano wajib memperhatikan aspek nanotoksikologi agar manfaat tinggi tidak menimbulkan bahaya kesehatan baru."
+            },
+            // SOAL 30 (Nanoteknologi - C6)
+            {
+                id: 30,
+                topic: "Peranan Nanoteknologi",
+                cognitive: "C6",
+                indicator: "Merancang ide pemanfaatan nano-selulosa dari limbah tanaman lokal.",
+                stimulus: "Limbah batang pisang atau serat serabut kelapa melimpah di Maluku Tengah dan mengandung selulosa tinggi.",
+                text: "Rancangan inovasi berbasis nanoteknologi terbaik untuk memanfaatkan limbah serat tersebut adalah...",
+                options: [
+                    "A. Membakar limbah serat untuk dijadikan abu gosok biasa",
+                    "B. Mengisolasi Nanofiber Selulosa (NCC) sebagai bahan penguat kemasan ramah lingkungan pengganti plastik",
+                    "C. Membuang limbah serat ke muara sungai",
+                    "D. Menggunakan serat langsung tanpa diolah sebagai makanan ternak",
+                    "E. Mendidihkan serat dengan asam pekat lalu dibuang ke selokan"
+                ],
+                answer: "B",
+                explanation: "Mengekstrak Nanocrystalline Cellulose (NCC) dari serat lokal menghasilkan biomaterial komposit super kuat dan biodegradable."
+            }
+        ];
+
+        // GLOBAL APP STATE
+        window.appState = {
+            questions: [...initialQuestions],
+            currentQIndex: 0,
+            userAnswers: {}, // { qId: 'A' }
+            flagged: {}, // { qId: true }
+            studentInfo: { name: '', class: '', num: '' },
+            examStarted: false,
+            timeRemaining: 60 * 60, // 60 mins in seconds
+            timerInterval: null,
+            adminPass: 'admin123',
+            isAdminLoggedIn: false,
+            settings: {
+                timeLimitMinutes: 60,
+                showReview: true,
+                shuffleQuestions: false,
+                shuffleOptions: false,
+                academicYear: "2026/2027",
+                semester: "Ganjil"
+            },
+            results: []
+        };
+
+        // DOM ELEMENTS
+        const homeSection = document.getElementById('homeSection');
+        const examSection = document.getElementById('examSection');
+        const resultSection = document.getElementById('resultSection');
+        const teacherDashboard = document.getElementById('teacherDashboard');
+        const reviewContainer = document.getElementById('reviewContainer');
+
+        // PERSISTENCE FUNCTIONS (FIREBASE & LOCALFALLBACK)
+        async function loadResultsFromCloud() {
+            if (!currentUser) return;
+            try {
+                const querySnap = await getDocs(collection(db, 'artifacts', appId, 'public', 'data', 'sas_results'));
+                const list = [];
+                querySnap.forEach(docSnap => {
+                    list.push({ id: docSnap.id, ...docSnap.data() });
+                });
+                window.appState.results = list;
+                renderStudentResultsTable();
+                updateDashboardCharts();
+            } catch (e) {
+                console.log("Using local storage fallback for results");
+                const localData = localStorage.getItem('sas_results_local');
+                if (localData) window.appState.results = JSON.parse(localData);
+                renderStudentResultsTable();
+            }
+        }
+
+        async function saveResultToCloud(resData) {
+            window.appState.results.push(resData);
+            localStorage.setItem('sas_results_local', JSON.stringify(window.appState.results));
+
+            if (currentUser) {
+                try {
+                    await addDoc(collection(db, 'artifacts', appId, 'public', 'data', 'sas_results'), resData);
+                } catch (e) {
+                    console.warn("Could not sync to cloud:", e);
+                }
+            }
+        }
+
+        // START ASSESSMENT
+        window.startAssessment = function(e) {
+            e.preventDefault();
+            const name = document.getElementById('regName').value.trim();
+            const cls = document.getElementById('regClass').value;
+            const num = document.getElementById('regNumber').value.trim();
+
+            if (!name || !cls || !num) return;
+
+            window.appState.studentInfo = { name, class: cls, num };
+            document.getElementById('examStudentInfo').innerText = `${name} (${cls})`;
+
+            // Prepare questions (Apply shuffle if enabled)
+            if (window.appState.settings.shuffleQuestions) {
+                window.appState.questions.sort(() => Math.random() - 0.5);
+            }
+
+            window.appState.examStarted = true;
+            window.appState.currentQIndex = 0;
+            window.appState.timeRemaining = window.appState.settings.timeLimitMinutes * 60;
+
+            homeSection.classList.add('hidden');
+            resultSection.classList.add('hidden');
+            teacherDashboard.classList.add('hidden');
+            examSection.classList.remove('hidden');
+
+            startTimer();
+            renderQuestion();
+            renderGrid();
+        };
+
+        // TIMER LOGIC
+        function startTimer() {
+            if (window.appState.timerInterval) clearInterval(window.appState.timerInterval);
+            
+            const timerEl = document.getElementById('timerDisplay');
+            window.appState.timerInterval = setInterval(() => {
+                if (window.appState.timeRemaining <= 0) {
+                    clearInterval(window.appState.timerInterval);
+                    alert("Waktu pengerjaan telah habis! Sistem akan mengumpulkan jawaban Anda otomatis.");
+                    submitExam();
+                    return;
+                }
+                window.appState.timeRemaining--;
+                const m = Math.floor(window.appState.timeRemaining / 60);
+                const s = window.appState.timeRemaining % 60;
+                timerEl.innerText = `${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
+            }, 1000);
+        }
+
+        // RENDER QUESTION
+        function renderQuestion() {
+            const q = window.appState.questions[window.appState.currentQIndex];
+            const total = window.appState.questions.length;
+
+            document.getElementById('qNumberLabel').innerText = `Soal #${window.appState.currentQIndex + 1}`;
+            document.getElementById('qTopicBadge').innerText = q.topic;
+            document.getElementById('qCognitiveBadge').innerText = `Level ${q.cognitive}`;
+            document.getElementById('examProgressText').innerText = `Soal ${window.appState.currentQIndex + 1} dari ${total}`;
+
+            // Stimulus
+            const stimBox = document.getElementById('qStimulusContainer');
+            if (q.stimulus) {
+                stimBox.innerHTML = `<strong>Stimulus Kontekstual:</strong> ${q.stimulus}`;
+                stimBox.classList.remove('hidden');
+            } else {
+                stimBox.classList.add('hidden');
+            }
+
+            document.getElementById('qText').innerText = q.text;
+
+            // Flag state
+            const isFlagged = window.appState.flagged[q.id];
+            const flagBtn = document.getElementById('flagBtn');
+            if (isFlagged) {
+                flagBtn.classList.add('bg-amber-100', 'text-amber-800', 'border-amber-400');
+            } else {
+                flagBtn.classList.remove('bg-amber-100', 'text-amber-800', 'border-amber-400');
+            }
+
+            // Options
+            const optContainer = document.getElementById('qOptionsContainer');
+            optContainer.innerHTML = '';
+
+            const selectedOpt = window.appState.userAnswers[q.id];
+
+            q.options.forEach((optText) => {
+                const optKey = optText.trim().charAt(0); // 'A', 'B', 'C', 'D', 'E'
+                const isChecked = selectedOpt === optKey;
+
+                const label = document.createElement('label');
+                label.className = `flex items-start p-3.5 rounded-xl border cursor-pointer transition ${
+                    isChecked 
+                    ? 'border-emerald-500 bg-emerald-50/80 text-emerald-950 font-medium shadow-sm' 
+                    : 'border-slate-200 bg-white hover:bg-slate-50 text-slate-700'
+                }`;
+                
+                label.innerHTML = `
+                    <input type="radio" name="qOption" value="${optKey}" ${isChecked ? 'checked' : ''} 
+                        onchange="selectOption('${q.id}', '${optKey}')" class="mt-0.5 w-4 h-4 text-emerald-600 focus:ring-emerald-500 accent-emerald-600">
+                    <span class="ml-3 text-xs sm:text-sm leading-relaxed">${optText}</span>
+                `;
+                optContainer.appendChild(label);
+            });
+
+            // Nav buttons state
+            document.getElementById('btnPrev').disabled = (window.appState.currentQIndex === 0);
+            
+            if (window.appState.currentQIndex === total - 1) {
+                document.getElementById('btnNext').classList.add('hidden');
+                document.getElementById('btnFinish').classList.remove('hidden');
+            } else {
+                document.getElementById('btnNext').classList.remove('hidden');
+                document.getElementById('btnFinish').classList.add('hidden');
+            }
+
+            renderGrid();
+        }
+
+        window.selectOption = function(qId, key) {
+            window.appState.userAnswers[qId] = key;
+            renderQuestion();
+            updateAnsweredCount();
+        };
+
+        window.toggleFlag = function() {
+            const q = window.appState.questions[window.appState.currentQIndex];
+            window.appState.flagged[q.id] = !window.appState.flagged[q.id];
+            renderQuestion();
+        };
+
+        window.nextQuestion = function() {
+            if (window.appState.currentQIndex < window.appState.questions.length - 1) {
+                window.appState.currentQIndex++;
+                renderQuestion();
+            }
+        };
+
+        window.prevQuestion = function() {
+            if (window.appState.currentQIndex > 0) {
+                window.appState.currentQIndex--;
+                renderQuestion();
+            }
+        };
+
+        window.jumpToQuestion = function(index) {
+            window.appState.currentQIndex = index;
+            renderQuestion();
+        };
+
+        // NAVIGATION DRAWER / PALETTE
+        function renderGrid() {
+            const grid = document.getElementById('questionGrid');
+            grid.innerHTML = '';
+
+            window.appState.questions.forEach((q, idx) => {
+                const isCurrent = idx === window.appState.currentQIndex;
+                const isAnswered = !!window.appState.userAnswers[q.id];
+                const isFlagged = !!window.appState.flagged[q.id];
+
+                let btnStyle = "bg-slate-100 text-slate-700 border-slate-200 hover:bg-slate-200";
+
+                if (isAnswered) {
+                    btnStyle = "bg-emerald-500 text-white font-bold border-emerald-600";
+                }
+                if (isFlagged) {
+                    btnStyle = "bg-amber-400 text-slate-950 font-bold border-amber-500";
+                }
+                if (isCurrent) {
+                    btnStyle += " ring-2 ring-slate-900 ring-offset-1";
+                }
+
+                const btn = document.createElement('button');
+                btn.className = `h-9 w-full rounded-lg text-xs font-semibold flex items-center justify-center border transition ${btnStyle}`;
+                btn.innerText = idx + 1;
+                btn.onclick = () => jumpToQuestion(idx);
+
+                grid.appendChild(btn);
+            });
+
+            updateAnsweredCount();
+        }
+
+        function updateAnsweredCount() {
+            const answered = Object.keys(window.appState.userAnswers).length;
+            document.getElementById('answeredCounter').innerText = `${answered} / 30 Terjawab`;
+        }
+
+        // SUBMIT AND SCORING
+        window.confirmSubmitExam = function() {
+            const total = window.appState.questions.length;
+            const answered = Object.keys(window.appState.userAnswers).length;
+            const remaining = total - answered;
+
+            let msg = "Apakah Anda yakin ingin mengakhiri dan mengirim asesmen ini?";
+            if (remaining > 0) {
+                msg = `Masih ada ${remaining} soal yang belum dijawab. Yakin ingin mengirim sekarang?`;
+            }
+
+            if (confirm(msg)) {
+                submitExam();
+            }
+        };
+
+        function submitExam() {
+            clearInterval(window.appState.timerInterval);
+
+            // Compute score
+            let correctCount = 0;
+            const questions = window.appState.questions;
+
+            questions.forEach(q => {
+                const userAns = window.appState.userAnswers[q.id];
+                if (userAns && userAns.trim().toUpperCase() === q.answer.trim().toUpperCase()) {
+                    correctCount++;
+                }
+            });
+
+            const totalQ = questions.length;
+            const wrongCount = totalQ - correctCount;
+            const finalScore = Math.round((correctCount / totalQ) * 100);
+
+            let category = "Perlu Bimbingan";
+            if (finalScore >= 90) category = "Sangat Baik (A)";
+            else if (finalScore >= 80) category = "Baik (B)";
+            else if (finalScore >= 75) category = "Cukup / Tuntas (C)";
+
+            // Update UI Scoreboard
+            document.getElementById('resName').innerText = window.appState.studentInfo.name;
+            document.getElementById('resClass').innerText = window.appState.studentInfo.class;
+            document.getElementById('resNum').innerText = window.appState.studentInfo.num;
+
+            document.getElementById('resScore').innerText = finalScore;
+            document.getElementById('resCorrect').innerText = correctCount;
+            document.getElementById('resWrong').innerText = wrongCount;
+            document.getElementById('resCategory').innerText = category;
+            
+            const kkmEl = document.getElementById('resKkmStatus');
+            if (finalScore >= 75) {
+                kkmEl.innerText = "TUNTAS KKM (≥75)";
+                kkmEl.className = "text-[10px] text-emerald-700 font-bold block";
+            } else {
+                kkmEl.innerText = "BELUM TUNTAS (<75)";
+                kkmEl.className = "text-[10px] text-red-600 font-bold block";
+            }
+
+            // Save record
+            const resultData = {
+                name: window.appState.studentInfo.name,
+                class: window.appState.studentInfo.class,
+                num: window.appState.studentInfo.num,
+                score: finalScore,
+                correct: correctCount,
+                wrong: wrongCount,
+                answers: window.appState.userAnswers,
+                timestamp: new Date().toLocaleString('id-ID')
+            };
+            saveResultToCloud(resultData);
+
+            // Trigger Confetti for High Score
+            if (finalScore >= 80 && typeof confetti === 'function') {
+                confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 } });
+            }
+
+            // Show Result View
+            examSection.classList.add('hidden');
+            resultSection.classList.remove('hidden');
+
+            // Render Explanations
+            renderReviewExplanations();
+        }
+
+        // EXPLANATION / REVIEW RENDER
+        function renderReviewExplanations() {
+            const list = document.getElementById('reviewList');
+            list.innerHTML = '';
+
+            if (!window.appState.settings.showReview) {
+                document.getElementById('btnToggleReview').classList.add('hidden');
+                return;
+            } else {
+                document.getElementById('btnToggleReview').classList.remove('hidden');
+            }
+
+            window.appState.questions.forEach((q, idx) => {
+                const userAns = window.appState.userAnswers[q.id] || "Tidak Dijawab";
+                const isCorrect = userAns.trim().toUpperCase() === q.answer.trim().toUpperCase();
+
+                const div = document.createElement('div');
+                div.className = `p-4 rounded-xl border text-xs sm:text-sm space-y-2 ${
+                    isCorrect ? 'bg-emerald-50/50 border-emerald-200' : 'bg-red-50/50 border-red-200'
+                }`;
+
+                div.innerHTML = `
+                    <div class="flex justify-between items-center font-bold">
+                        <span class="text-slate-900">#${idx + 1}. ${q.text}</span>
+                        <span class="${isCorrect ? 'text-emerald-700' : 'text-red-700'} uppercase font-extrabold text-xs">
+                            ${isCorrect ? '✓ BENAR' : '✗ SALAH'}
+                        </span>
+                    </div>
+                    ${q.stimulus ? `<p class="text-slate-500 italic text-xs">Stimulus: ${q.stimulus}</p>` : ''}
+                    <div class="flex gap-4 text-xs font-semibold pt-1">
+                        <span class="text-slate-700">Jawaban Anda: <strong class="${isCorrect ? 'text-emerald-700' : 'text-red-700'}">${userAns}</strong></span>
+                        <span class="text-slate-700">Kunci Jawaban: <strong class="text-emerald-700">${q.answer}</strong></span>
+                    </div>
+                    <div class="bg-white p-3 rounded-lg border border-slate-200 text-xs text-slate-600 mt-2">
+                        <strong class="text-slate-800">Pembahasan:</strong> ${q.explanation}
+                    </div>
+                `;
+                list.appendChild(div);
+            });
+        }
+
+        window.toggleReviewSection = function() {
+            reviewContainer.classList.toggle('hidden');
+        };
+
+        // ADMIN / TEACHER PORTAL LOGIC
+        window.toggleTeacherAuth = function() {
+            if (window.appState.isAdminLoggedIn) {
+                showTeacherDashboard();
+            } else {
+                document.getElementById('authModal').classList.remove('hidden');
+            }
+        };
+
+        window.closeAuthModal = function() {
+            document.getElementById('authModal').classList.add('hidden');
+        };
+
+        window.verifyTeacherPass = function() {
+            const pass = document.getElementById('adminPasswordInput').value;
+            if (pass === window.appState.adminPass) {
+                window.appState.isAdminLoggedIn = true;
+                document.getElementById('authBtnText').innerText = "Dashboard Admin";
+                closeAuthModal();
+                showTeacherDashboard();
+            } else {
+                alert("Kata sandi salah!");
+            }
+        };
+
+        function showTeacherDashboard() {
+            homeSection.classList.add('hidden');
+            examSection.classList.add('hidden');
+            resultSection.classList.add('hidden');
+            teacherDashboard.classList.remove('hidden');
+
+            renderStudentResultsTable();
+            renderAdminBankList();
+            updateDashboardCharts();
+        }
+
+        window.exitTeacherMode = function() {
+            teacherDashboard.classList.add('hidden');
+            homeSection.classList.remove('hidden');
+        };
+
+        window.switchAdminTab = function(tabId) {
+            ['analyticsTab', 'bankTab', 'settingsTab'].forEach(t => {
+                document.getElementById(t).classList.add('hidden');
+            });
+            document.getElementById(tabId).classList.remove('hidden');
+
+            // Reset tab button colors
+            const tabs = [
+                { id: 'tabNavAnalytics', target: 'analyticsTab' },
+                { id: 'tabNavBank', target: 'bankTab' },
+                { id: 'tabNavSettings', target: 'settingsTab' }
+            ];
+
+            tabs.forEach(t => {
+                const btn = document.getElementById(t.id);
+                if (t.target === tabId) {
+                    btn.className = "py-2.5 px-4 font-semibold text-xs sm:text-sm border-b-2 border-emerald-600 text-emerald-700 flex items-center gap-2";
+                } else {
+                    btn.className = "py-2.5 px-4 font-semibold text-xs sm:text-sm text-slate-500 hover:text-slate-800 flex items-center gap-2";
+                }
+            });
+        };
+
+        // ADMIN ANALYTICS & TABLE
+        function renderStudentResultsTable() {
+            const tbody = document.getElementById('studentResultsTableBody');
+            tbody.innerHTML = '';
+
+            const results = window.appState.results;
+            if (results.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="8" class="p-4 text-center text-slate-400">Belum ada peserta didik yang mengumpulkan jawaban.</td></tr>`;
+                updateSummaryCards(0, 0, 0, 0, 0);
+                return;
+            }
+
+            let totalScore = 0;
+            let highest = -1;
+            let lowest = 101;
+            let passedCount = 0;
+
+            results.forEach((res, idx) => {
+                totalScore += res.score;
+                if (res.score > highest) highest = res.score;
+                if (res.score < lowest) lowest = res.score;
+                if (res.score >= 75) passedCount++;
+
+                const tr = document.createElement('tr');
+                tr.className = "hover:bg-slate-50";
+                tr.innerHTML = `
+                    <td class="p-3 font-medium">${idx + 1}</td>
+                    <td class="p-3 font-semibold text-slate-900">${res.name}</td>
+                    <td class="p-3">${res.class}</td>
+                    <td class="p-3 text-slate-500">${res.num}</td>
+                    <td class="p-3 text-xs"><span class="text-emerald-600 font-bold">${res.correct} B</span> / <span class="text-red-500 font-bold">${res.wrong} S</span></td>
+                    <td class="p-3 font-bold text-slate-900">${res.score}</td>
+                    <td class="p-3">
+                        <span class="px-2 py-0.5 rounded-full text-[10px] font-bold ${res.score >= 75 ? 'bg-emerald-100 text-emerald-800' : 'bg-red-100 text-red-800'}">
+                            ${res.score >= 75 ? 'Tuntas' : 'Belum Tuntas'}
+                        </span>
+                    </td>
+                    <td class="p-3 text-right">
+                        <button onclick="deleteSingleResult('${res.id || idx}')" class="text-red-500 hover:text-red-700">
+                            <i data-lucide="trash-2" class="w-4 h-4"></i>
+                        </button>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+
+            const avg = (totalScore / results.length).toFixed(1);
+            const passRate = Math.round((passedCount / results.length) * 100);
+
+            updateSummaryCards(avg, highest, lowest, passRate, results.length);
+            if (window.lucide) lucide.createIcons();
+        }
+
+        function updateSummaryCards(avg, high, low, passRate, total) {
+            document.getElementById('statAvg').innerText = avg;
+            document.getElementById('statHighLow').innerText = `${high === -1 ? 0 : high} / ${low === 101 ? 0 : low}`;
+            document.getElementById('statPassingRate').innerText = `${passRate}%`;
+            document.getElementById('statTotalStudents').innerText = total;
+        }
+
+        window.deleteSingleResult = async function(id) {
+            if (confirm("Hapus rekap nilai peserta didik ini?")) {
+                window.appState.results = window.appState.results.filter((r, idx) => (r.id !== id && idx !== parseInt(id)));
+                localStorage.setItem('sas_results_local', JSON.stringify(window.appState.results));
+
+                if (currentUser && typeof id === 'string' && id.length > 5) {
+                    try {
+                        await deleteDoc(doc(db, 'artifacts', appId, 'public', 'data', 'sas_results', id));
+                    } catch(e){}
+                }
+                renderStudentResultsTable();
+                updateDashboardCharts();
+            }
+        };
+
+        window.clearAllResults = function() {
+            if (confirm("HAPUS SEMUA DATA HASIL UJIAN PESERTA DIDIK?")) {
+                window.appState.results = [];
+                localStorage.removeItem('sas_results_local');
+                renderStudentResultsTable();
+                updateDashboardCharts();
+            }
+        };
+
+        // EXPORT CSV
+        window.exportResultsCSV = function() {
+            const results = window.appState.results;
+            if (results.length === 0) {
+                alert("Belum ada data hasil ujian untuk diekspor!");
+                return;
+            }
+
+            let csvContent = "data:text/csv;charset=utf-8,No,Nama Lengkap,Kelas,Nomor Ujian,Jawaban Benar,Jawaban Salah,Nilai Akhir,Status KKM,Waktu Selesai\n";
+
+            results.forEach((r, idx) => {
+                const status = r.score >= 75 ? "Tuntas" : "Belum Tuntas";
+                csvContent += `${idx + 1},"${r.name}","${r.class}","${r.num}",${r.correct},${r.wrong},${r.score},"${status}","${r.timestamp}"\n`;
+            });
+
+            const encodedUri = encodeURI(csvContent);
+            const link = document.createElement("a");
+            link.setAttribute("href", encodedUri);
+            link.setAttribute("download", `REKAP_NILAI_SAS_KIMIA_${new Date().toISOString().slice(0,10)}.csv`);
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        };
+
+        // ADMIN QUESTION BANK MANAGER
+        function renderAdminBankList() {
+            const container = document.getElementById('adminQuestionList');
+            container.innerHTML = '';
+
+            window.appState.questions.forEach((q, idx) => {
+                const card = document.createElement('div');
+                card.className = "bg-white p-5 rounded-2xl border border-slate-200 shadow-sm space-y-3";
+                
+                card.innerHTML = `
+                    <div class="flex flex-wrap justify-between items-center gap-2 pb-2 border-b">
+                        <div class="flex items-center gap-2">
+                            <span class="font-bold text-slate-900 text-sm">Soal Nomor #${idx + 1}</span>
+                            <span class="text-xs bg-slate-100 text-slate-700 px-2 py-0.5 rounded">${q.topic}</span>
+                            <span class="text-xs bg-purple-100 text-purple-800 px-2 py-0.5 rounded font-bold">${q.cognitive}</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <span class="text-xs font-semibold text-emerald-700">Kunci: <strong>${q.answer}</strong></span>
+                        </div>
+                    </div>
+                    
+                    <p class="text-xs text-slate-500"><strong>Indikator:</strong> ${q.indicator}</p>
+                    <p class="text-xs sm:text-sm text-slate-800 font-medium">${q.text}</p>
+                    
+                    <div class="text-xs text-slate-600 bg-slate-50 p-3 rounded-lg border border-slate-100 space-y-1">
+                        ${q.options.map(o => `<div>${o}</div>`).join('')}
+                    </div>
+
+                    <div class="text-xs text-slate-500 pt-1">
+                        <strong>Pembahasan:</strong> ${q.explanation}
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        // SETTINGS SAVE
+        window.saveAdminSettings = function() {
+            const time = parseInt(document.getElementById('settingTime').value) || 60;
+            const year = document.getElementById('settingYear').value;
+            const sem = document.getElementById('settingSemester').value;
+
+            window.appState.settings.timeLimitMinutes = time;
+            window.appState.settings.academicYear = year;
+            window.appState.settings.semester = sem;
+            window.appState.settings.showReview = document.getElementById('settingShowReview').checked;
+            window.appState.settings.shuffleOptions = document.getElementById('settingShuffleOptions').checked;
+            window.appState.settings.shuffleQuestions = document.getElementById('settingShuffleQuestions').checked;
+
+            document.getElementById('dispYear').innerText = year;
+            document.getElementById('dispSemester').innerText = sem;
+            document.getElementById('dispTime').innerText = time;
+
+            alert("Pengaturan Asesmen SAS Berhasil Disimpan!");
+        };
+
+        // CHARTS LOGIC
+        let topicChartInstance = null;
+        let bloomChartInstance = null;
+
+        function updateDashboardCharts() {
+            const results = window.appState.results;
+
+            // Chart 1: Topic Performance
+            const ctxTopic = document.getElementById('topicChart')?.getContext('2d');
+            if (ctxTopic) {
+                if (topicChartInstance) topicChartInstance.destroy();
+                
+                // Sample topic distribution
+                topicChartInstance = new Chart(ctxTopic, {
+                    type: 'doughnut',
+                    data: {
+                        labels: ['Gerakan Kimia Hijau (18 Soal)', 'Peranan Nanoteknologi (12 Soal)'],
+                        datasets: [{
+                            data: [18, 12],
+                            backgroundColor: ['#10b981', '#06b6d4']
+                        }]
+                    },
+                    options: { responsive: true, maintainAspectRatio: false }
+                });
+            }
+
+            // Chart 2: Bloom Cognitive
+            const ctxBloom = document.getElementById('bloomChart')?.getContext('2d');
+            if (ctxBloom) {
+                if (bloomChartInstance) bloomChartInstance.destroy();
+
+                bloomChartInstance = new Chart(ctxBloom, {
+                    type: 'bar',
+                    data: {
+                        labels: ['C1 (Ingat)', 'C2 (Paham)', 'C3 (Terap)', 'C4 (Analisis)', 'C5 (Evaluasi)', 'C6 (Cipta)'],
+                        datasets: [{
+                            label: 'Jumlah Butir Soal',
+                            data: [3, 6, 6, 9, 4, 2],
+                            backgroundColor: ['#3b82f6', '#60a5fa', '#34d399', '#a78bfa', '#f43f5e', '#fbbf24']
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: { y: { beginAtZero: true } }
+                    }
+                });
+            }
+        }
+
+        // MATRIX MODAL
+        window.openMatrixModal = function() {
+            document.getElementById('matrixModal').classList.remove('hidden');
+        };
+        window.closeMatrixModal = function() {
+            document.getElementById('matrixModal').classList.add('hidden');
+        };
+
+        // DRAWER TOGGLE
+        window.toggleDrawer = function() {
+            // Smooth scroll or focus to drawer on mobile
+            const grid = document.getElementById('questionGrid');
+            grid.scrollIntoView({ behavior: 'smooth' });
+        };
+
+        // INITIALIZATION
+        window.onload = function() {
+            if (window.lucide) lucide.createIcons();
+        };
+    </script>
+</body>
+</html>
